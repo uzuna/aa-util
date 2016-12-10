@@ -12,8 +12,8 @@ describe('steram', ()=>{
 
 		function *main(){
 			const target = [0,1,2,3,4,5]
-			const stream = yield au.stream.a2s(target);
-			const result = yield au.stream.reduce(stream);
+			const src = yield au.stream.a2s(target);
+			const result = yield au.stream.reduce(src);
 			expect(result).to.deep.eq(target);
 		}
 	})
@@ -26,8 +26,8 @@ describe('steram', ()=>{
 			const g = function *(){
 				yield* target
 			}
-			const stream = yield au.stream.g2s(g());
-			const result = yield au.stream.reduce(stream);
+			const src = yield au.stream.g2s(g());
+			const result = yield au.stream.reduce(src);
 			expect(result).to.deep.eq(target);
 		}
 	})
@@ -40,10 +40,10 @@ describe('steram', ()=>{
 			const g = function *(){
 				yield* target
 			}
-			const stream = yield au.stream.g2s(g());
+			const src = yield au.stream.g2s(g());
 			
 			// set custom reducer to second argument
-			const result = yield au.stream.reduce(stream, sumStream());
+			const result = yield au.stream.reduce(src, sumStream());
 			const sum = target.reduce((a, b)=>{ return a + b;}, 0)
 			expect(result).to.deep.eq(sum);
 		}
@@ -64,6 +64,23 @@ describe('steram', ()=>{
 					cb()
 				}
 			})
+		}
+	})
+
+	it('reduce writable', function(){
+		return aa(main())
+
+		function *main(){
+			const target = [0,1,2,3,4,5]
+			const g = function *(){
+				yield* target.toString()
+			}
+			const src = yield au.stream.g2s(g());
+			const dest = stream.Writable({
+				write: function(chunk, enc, cb){ return cb()}
+			})
+			let latest = au.stream.pipe([src, dest])
+			let result = yield au.stream.reduce(latest)
 		}
 	})
 })

@@ -1,6 +1,6 @@
 {
   "name": "aa-util",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Utility for Async-Await with stream",
   "main": "index.js",
   "scripts": {
@@ -12,14 +12,14 @@
   ],
   "author": "Fumiya Fujinaka",
   "email": "uzuna.kf@gmail.com",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "aa": "^0.1.39"
   },
   "devDependencies": {
     "chai": "^3.5.0"
   },
-  "engines" : { "node" : ">=4.1.0" },
+  "engines" : { "node" : ">=4.0.0" },
   "repository" :
   {
     "type" : "git",
