@@ -17,12 +17,14 @@
     "aa": "^0.1.39"
   },
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   },
-  "engines" : { "node" : ">=4.0.0" },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/uzuna/aa-util"
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uzuna/aa-util"
   }
 }

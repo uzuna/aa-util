@@ -32,4 +32,14 @@ function *main(){
 	const stream = yield au.stream.g2s(g());
 	const result = yield au.stream.reduce(stream);
 }
+
+
+// piping and wait close
+
+function *main(){
+	const src = fs.createReadStream("hoge")
+	const dest = fs.createWriteStream("fuga")
+	const latest = au.stream.pipe([src, dest])
+	yield au.stream.reduce(latest);
+}
 ```
